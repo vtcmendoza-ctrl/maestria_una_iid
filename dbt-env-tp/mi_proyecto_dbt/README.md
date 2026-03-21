@@ -13,7 +13,7 @@ El proyecto sigue una arquitectura adaptada a dbt:
 
 ## 📊 Linaje de Datos (DAG)
 
-![Grafo de Dependencias](9.line_graph.PNG)
+![Grafo de Dependencias](/docs/9.line_graph.PNG)
 
 ## 🛠️ Requisitos Previos
 
