@@ -15,6 +15,23 @@ El proyecto sigue una arquitectura adaptada a dbt:
 
 ![Grafo de Dependencias](/dbt-env-tp/mi_proyecto_dbt/docs/9.line_graph.PNG)
 
+
+### 🛡️ Estrategia de Calidad de Datos
+Se han implementado **15 puntos de control** para asegurar que la información en la tabla final (`obt_tipo_cambio`) sea confiable:
+
+1. **Tests Genéricos:** Garantizan la unicidad y completitud de los datos (`unique`, `not_null`).
+2. **Tests Avanzados (dbt-expectations):** * **Validación de volumen:** La tabla de staging no debe estar vacía.
+   * **Validación de rangos:** Las tasas de cambio y promedios deben ser valores positivos coherentes.
+3. **Tests Singulares (Reglas de Negocio):** * `assert_monedas_distintas`: Detecta si la moneda base es igual a la de destino.
+   * `assert_tipo_cambio_positivo`: Asegura que no existan valores financieros imposibles.
+
+> **Nota de Gestión de Excepciones:** Se ha configurado la severidad `warn` en validaciones críticas de negocio.Esto permite que el pipeline se complete exitosamente para mantener la disponibilidad de datos, mientras se generan alertas para la investigación de anomalías detectadas en la fuente.
+
+## 📊 Linaje de Datos (DAG) con calidad de datos
+
+![Grafo de Dependencias](/dbt-env-tp/mi_proyecto_dbt/docs/10.tp6_line_graph_dbt_expectations.PNG)
+
+
 ## 🛠️ Requisitos Previos
 
 * Python 3.10+
