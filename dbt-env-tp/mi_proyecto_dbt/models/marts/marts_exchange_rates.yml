@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: obt_tipo_cambio
+    description: "Tabla final consolidada"
+    columns:
+      - name: moneda_base
+        tests:
+          # Solo permitir  estas monedas 
+          - accepted_values:
+              values: ['USD', 'EUR', 'PYG']
+      - name: tc_promedio
+        tests:
+          # dbt-expectations: El promedio debe estar en un rango lógico
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100000
+              severity: warn #avisar pero no detener el proceso
